@@ -1,25 +1,34 @@
 import { authenticationConstants } from "../../constants/Authentication";
 
-let token = localStorage.getItem('token');
-const initialState = token ? { loggedIn: true, token } : {};
+const initialState = {
+  loggingIn: false,
+  loggingFailure: false
+};
 
-export function authenticationReducer(state = initialState, action) {
+export function loginReducer(state = initialState, action) {
   switch (action.type) {
     case authenticationConstants.LOGIN_REQUEST:
       return {
+        ...state,
         loggingIn: true,
+        loggingFailure: false,
       };
     case authenticationConstants.LOGIN_SUCCESS:
       return {
-        loggedIn: true,
-        // token: action.token
+        ...state,
+        loggingIn: false,
       };
     case authenticationConstants.LOGIN_FAILURE:
       return {
+        ...state,
+        loggingIn: false,
         loggingFailure: true,
       };
     case authenticationConstants.LOGOUT_REQUEST:
-      return {};
+      return {
+        ...state,
+        loggingIn: false,
+      };
     default:
       return state
   }

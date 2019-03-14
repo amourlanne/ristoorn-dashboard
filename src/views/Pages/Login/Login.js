@@ -23,7 +23,7 @@ class Login extends Component {
     super(props);
 
     // reset login status
-    this.props.dispatch(authenticationActions.logout());
+    this.props.logout();
 
     this.state = {
       email: '',
@@ -45,10 +45,9 @@ class Login extends Component {
 
     this.setState({submitted: true});
     const {email, password} = this.state;
-    const {dispatch} = this.props;
 
     if (email && password) {
-      dispatch(authenticationActions.login(email, password));
+      this.props.login(email, password);
     }
   }
 
@@ -130,11 +129,18 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  const {loggingIn, loggingFailure} = state.authenticationReducer;
+  const {loggingIn, loggingFailure} = state.loginReducer;
   return {
-    loggingIn,
-    loggingFailure,
+    loggingIn: loggingIn,
+    loggingFailure: loggingFailure,
   };
 }
 
-export default connect(mapStateToProps)(Login);
+function mapDispatchToProps(dispatch) {
+  return {
+    login: (email,password) => dispatch(authenticationActions.login(email, password)),
+    logout: () => dispatch(authenticationActions.logout()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps )(Login);

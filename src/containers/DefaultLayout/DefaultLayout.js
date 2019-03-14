@@ -47,7 +47,7 @@ class DefaultLayout extends Component {
       <div className="app">
         <AppHeader fixed>
           <Suspense  fallback={this.loading()}>
-            <DefaultHeader onLogout={e=>this.signOut(e)} {...this.props}/>
+            <DefaultHeader onLogout={e=>this.signOut(e)}/>
           </Suspense>
         </AppHeader>
         <div className="app-body">
@@ -98,12 +98,8 @@ class DefaultLayout extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { user } = state.userReducer;
-
-  return {
-    user: user,
-  };
+function mapStateToProps() {
+  return {}
 }
 
 export default connect(mapStateToProps)(DefaultLayout);

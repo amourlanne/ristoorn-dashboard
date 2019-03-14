@@ -1,5 +1,5 @@
 {
-  "name": "UserReducer",
+  "name": "GlobalReducer",
   "version": "0.0.0",
   "private": true,
   "main": "./reducer.js"

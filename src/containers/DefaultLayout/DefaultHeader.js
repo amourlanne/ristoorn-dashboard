@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/logo.svg'
 import sygnet from '../../assets/img/brand/sygnet.svg'
+import {connect} from "react-redux";
 
 const propTypes = {
   children: PropTypes.node,
@@ -81,4 +82,12 @@ class DefaultHeader extends Component {
 DefaultHeader.propTypes = propTypes;
 DefaultHeader.defaultProps = defaultProps;
 
-export default DefaultHeader;
+function mapStateToProps(state) {
+  const { user } = state.globalReducer;
+
+  return {
+    user: user,
+  };
+}
+
+export default connect(mapStateToProps)(DefaultHeader);

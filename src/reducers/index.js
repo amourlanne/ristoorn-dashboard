@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
-import {authenticationReducer} from "./Authentication";
-import {userReducer} from "./User";
+import {loginReducer} from "./Login";
+import {globalReducer} from "./Global";
 
 const rootReducer = combineReducers({
-  authenticationReducer,
-  userReducer
+  loginReducer,
+  globalReducer,
 });
 
 export default rootReducer;
