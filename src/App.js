@@ -38,7 +38,6 @@ const Page500 = Loadable({
 class App extends Component {
 
   render() {
-    console.log(process.env);
     return (
       <Router history={history}>
           <Switch>

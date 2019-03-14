@@ -102,7 +102,7 @@ function mapStateToProps(state) {
   const { user } = state.userReducer;
 
   return {
-    user,
+    user: user,
   };
 }
 
