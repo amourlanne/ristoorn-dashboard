@@ -27,10 +27,6 @@ const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     if(!localStorage.getItem('user'))
       this.props.dispatch(userActions.getMe());
