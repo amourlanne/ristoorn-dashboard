@@ -1,0 +1,6 @@
+{
+  "name": "PartnersReducer",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./reducer.js"
+}

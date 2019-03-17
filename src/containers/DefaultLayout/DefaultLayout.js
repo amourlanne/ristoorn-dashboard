@@ -29,10 +29,11 @@ class DefaultLayout extends Component {
 
   constructor(props) {
     super(props);
-    // reset login status
+  }
+
+  componentDidMount() {
     if(!localStorage.getItem('user'))
       this.props.dispatch(userActions.getMe());
-    ;
   }
 
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
