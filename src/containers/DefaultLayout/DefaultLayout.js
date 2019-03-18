@@ -28,23 +28,18 @@ const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 class DefaultLayout extends Component {
 
   componentDidMount() {
-    if(!localStorage.getItem('user'))
-      this.props.dispatch(userActions.getMe());
+    const {user, getMe} = this.props;
+    if(!user) getMe();
   }
 
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
-
-  signOut(e) {
-    e.preventDefault()
-    this.props.history.push('/login')
-  }
 
   render() {
     return (
       <div className="app">
         <AppHeader fixed>
           <Suspense  fallback={this.loading()}>
-            <DefaultHeader onLogout={e=>this.signOut(e)}/>
+            <DefaultHeader/>
           </Suspense>
         </AppHeader>
         <div className="app-body">
@@ -95,8 +90,17 @@ class DefaultLayout extends Component {
   }
 }
 
-function mapStateToProps() {
-  return {}
+function mapStateToProps(state) {
+  const {user} = state.globalReducer;
+  return {
+    user: user
+  }
 }
 
-export default connect(mapStateToProps)(DefaultLayout);
+function mapDispatchToProps(dispatch) {
+  return {
+    getMe: () => dispatch(userActions.getMe()),
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(DefaultLayout);

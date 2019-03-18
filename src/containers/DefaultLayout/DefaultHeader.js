@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink } from 'reactstrap';
 import PropTypes from 'prop-types';
 
@@ -7,6 +7,7 @@ import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler }
 import logo from '../../assets/img/brand/logo.svg'
 import sygnet from '../../assets/img/brand/sygnet.svg'
 import {connect} from "react-redux";
+import {authenticationActions} from "../../actions/Authentication";
 
 const propTypes = {
   children: PropTypes.node,
@@ -17,8 +18,7 @@ const defaultProps = {};
 class DefaultHeader extends Component {
   render() {
 
-    // eslint-disable-next-line
-    const { children, ...attributes } = this.props;
+    const { user, logout } = this.props;
 
     return (
       <React.Fragment>
@@ -29,7 +29,7 @@ class DefaultHeader extends Component {
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 
-        <Nav className="d-md-down-none" navbar>
+        {/*<Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
             <Link to="/" className="nav-link" >Dashboard</Link>
           </NavItem>
@@ -42,7 +42,7 @@ class DefaultHeader extends Component {
           <NavItem className="px-3">
             <NavLink href="#">Settings</NavLink>
           </NavItem>
-        </Nav>
+        </Nav>*/}
         <Nav className="ml-auto" navbar>
           <NavItem className="d-md-down-none">
             <NavLink href="#"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
@@ -56,7 +56,7 @@ class DefaultHeader extends Component {
           <AppHeaderDropdown direction="down">
             <DropdownToggle nav>
               <img src={'../../assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-              <span className="mr-3">{this.props.user && this.props.user.email}</span>
+              <span className="mr-3">{user && user.email}</span>
             </DropdownToggle>
             <DropdownMenu right style={{ right: 'auto' }}>
               <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>
@@ -71,7 +71,7 @@ class DefaultHeader extends Component {
               <DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>
               <DropdownItem divider />
               <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>
-              <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
+              <DropdownItem onClick={e => logout()}><i className="fa fa-lock"></i> Logout</DropdownItem>
             </DropdownMenu>
           </AppHeaderDropdown>
         </Nav>
@@ -93,4 +93,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(DefaultHeader);
+function mapDispatchToProps(dispatch) {
+  return {
+    logout: () => dispatch(authenticationActions.logout()),
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(DefaultHeader);

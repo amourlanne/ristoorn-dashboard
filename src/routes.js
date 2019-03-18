@@ -84,6 +84,7 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   { path: '/partners', exact: true,  name: 'Partners', component: Partners },
+  { path: '/partners/new', exact: true, name: 'Partners New', component: Partner },
   { path: '/partners/:id', exact: true, name: 'Partners Details', component: Partner },
 
 ];

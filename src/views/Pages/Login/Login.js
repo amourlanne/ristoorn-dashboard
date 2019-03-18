@@ -22,9 +22,6 @@ class Login extends Component {
   constructor(props) {
     super(props);
 
-    // reset login status
-    this.props.logout();
-
     this.state = {
       email: '',
       password: '',
@@ -33,6 +30,13 @@ class Login extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const {token, history} = this.props;
+    if(token) {
+      history.push("/")
+    }
   }
 
   handleChange(e) {
@@ -130,16 +134,17 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   const {loggingIn, loggingFailure} = state.loginReducer;
+  const {token} = state.globalReducer;
   return {
     loggingIn: loggingIn,
     loggingFailure: loggingFailure,
+    token: token
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     login: (email,password) => dispatch(authenticationActions.login(email, password)),
-    logout: () => dispatch(authenticationActions.logout()),
   }
 }
 

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import {history} from '../../helpers/BrowserHistory'
+import {
+  Card, CardBody, CardHeader, Col, Row,
+  Table
+} from 'reactstrap';
 
 import {connect} from "react-redux";
 import {partnerActions} from "../../actions/Partner";
@@ -25,6 +29,10 @@ class Partners extends Component {
     this.props.fetchAll();
   }
 
+  toNewPartner() {
+    history.push("/partners/new");
+  }
+
   render() {
 
     const {partners} = this.props;
@@ -36,6 +44,10 @@ class Partners extends Component {
             <Card>
               <CardHeader>
                 <i className="fa fa-align-justify"></i> Partners <small className="text-muted">All</small>
+                <div className="card-header-actions">
+                  {/*eslint-disable-next-line*/}
+                  <i className="icon-plus pointer" onClick={this.toNewPartner}></i>
+                </div>
               </CardHeader>
               <CardBody>
                 <Table responsive hover>

@@ -39,6 +39,7 @@ function login(email, password) {
 }
 
 function logout() {
-    authenticationService.logout()
+    authenticationService.logout();
+    history.push('/login');
     return { type: authenticationConstants.LOGOUT_REQUEST };
 }

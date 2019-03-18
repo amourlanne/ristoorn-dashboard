@@ -1,6 +1,11 @@
 export default {
   items: [
     {
+      name: 'Partners',
+      url: '/partners',
+      icon: 'icon-user',
+    },
+    /*  {
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
@@ -275,6 +280,6 @@ export default {
       icon: 'icon-layers',
       variant: 'danger',
       attributes: { target: '_blank', rel: "noopener" },
-    },
+    },*/
   ],
 };
